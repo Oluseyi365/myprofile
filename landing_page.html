@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oluwaseyi Okesooto — Physician · Scientist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Syne:wght@300;400;500&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1623;
+    --ink-mid: #2e3a50;
+    --ink-light: #6a7a90;
+    --cream: #f4f6fa;
+    --cream-dark: #eaecf4;
+    --gold: #d4790a;
+    --gold-light: #e89a38;
+    --green: #0e2a4a;
+    --green-mid: #1a3f6e;
+    --green-accent: #2e6eb0;
+    --white: #f8faff;
+    --border: rgba(30,60,110,0.12);
+    --teal: #0d7a8a;
+    --teal-light: #1aabb8;
+    --amber: #e07b1a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Syne', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(244,246,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 15%; bottom: 15%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s ease forwards;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  .hero-creds {
+    font-family: 'Syne Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    border: 1px solid var(--gold-light);
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s ease forwards;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink-mid);
+    max-width: 440px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s ease forwards;
+  }
+
+  .hero-desc strong {
+    color: var(--green);
+    font-weight: 500;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--green);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 14px 28px;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+  /* Hero right — decorative panel */
+  .hero-right {
+    background: #0e2a4a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 80px 60px;
+    opacity: 0;
+    animation: fadeIn 1s 0.6s ease forwards;
+  }
+
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 75% 25%, rgba(13,122,138,0.18) 0%, transparent 55%),
+      radial-gradient(circle at 20% 75%, rgba(46,110,176,0.12) 0%, transparent 50%);
+
+    pointer-events: none;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(100,180,220,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(100,180,220,0.06) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  .hero-monogram {
+    font-family: 'Playfair Display', serif;
+    font-size: 180px;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(140,190,230,0.06);
+    position: absolute;
+    line-height: 1;
+    letter-spacing: -0.06em;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    max-width: 360px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #a8d4f0;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(140,190,230,0.5);
+  }
+
+  .stat-card.wide {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ─── SECTIONS SHARED ─── */
+  section {
+    padding: 100px 80px;
+  }
+
+  .section-label {
+    font-family: 'Syne Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-mid);
+    margin-bottom: 20px;
+  }
+
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-sidebar {
+    padding-top: 16px;
+  }
+
+  .sidebar-block {
+    border-top: 1px solid var(--border);
+    padding: 20px 0;
+  }
+
+  .sidebar-block:last-child { border-bottom: 1px solid var(--border); }
+
+  .sidebar-key {
+    font-family: 'Syne Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 6px;
+  }
+
+  .sidebar-val {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .sidebar-val a {
+    color: var(--green);
+    text-decoration: none;
+  }
+
+  /* ─── RESEARCH ─── */
+  #research {
+    background: var(--cream-dark);
+  }
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .research-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .research-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+
+  .research-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--amber), var(--teal));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .research-card:hover::before { transform: scaleX(1); }
+
+  .rc-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .rc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--green);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .rc-body {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--ink-mid);
+  }
+
+  .rc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 20px;
+  }
+
+  .rc-tag {
+    font-family: 'Syne Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid rgba(13,122,138,0.28);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  /* ─── EXPERIENCE / LEADERSHIP ─── */
+  #experience {
+    background: var(--green);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #experience::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(100,170,220,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(100,170,220,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  #experience .section-title { color: #a8d4f0; }
+  #experience .section-label { color: var(--gold-light); }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    position: relative;
+    z-index: 1;
+  }
+
+  .exp-item {
+    background: rgba(14,42,74,0.85);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 36px;
+    transition: background 0.2s;
+  }
+
+  .exp-item:hover { background: rgba(26,63,110,0.9); }
+
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: #b8dcf8;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .exp-org {
+    font-family: 'Syne Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+  }
+
+  .exp-body {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(140,190,230,0.65);
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--white);
+    text-align: center;
+    padding: 120px 80px;
+  }
+
+  #contact .section-title {
+    max-width: 600px;
+    margin: 0 auto 48px;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover { color: var(--green); }
+
+  .contact-link .icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .contact-link:hover .icon {
+    border-color: var(--green);
+    background: rgba(30,58,42,0.05);
+  }
+
+  .contact-link .icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+  .contact-link span {
+    font-family: 'Syne Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+
+  .contact-email {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--green);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.3);
+    padding: 28px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .f-left {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: rgba(255,255,255,0.5);
+  }
+
+  footer .f-right {
+    font-family: 'Syne Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 28px; }
+    .nav-links { gap: 20px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 320px; }
+    .hero-left { padding: 60px 28px; }
+    section { padding: 72px 28px; }
+    #about { grid-template-columns: 1fr; gap: 40px; }
+    .research-grid { grid-template-columns: 1fr; }
+    .exp-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Oluwaseyi Okesooto</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#experience">Leadership</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Physician · Doctoral Researcher · Translational Scientist</div>
+    <h1 class="hero-name">Oluwaseyi<br><em>Okesooto</em></h1>
+    <div class="hero-creds">MBChB &nbsp;·&nbsp; PhD Candidate</div>
+    <p class="hero-desc">
+      Investigating how <strong>ethanol-induced acetylation changes</strong> disrupt hepatic intracellular trafficking and organelle dynamics — with a focus on translating bench findings into <strong>biotech-ready therapeutic insights</strong> for alcohol-associated liver disease.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#research" class="btn-primary">View Research</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-monogram">OO</div>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Manuscripts<br>In Progress</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Conferences<br>Presented</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Leadership<br>Roles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">MD</div>
+        <div class="stat-label">Clinical<br>Background</div>
+      </div>
+      <div class="stat-card wide">
+        <div>
+          <div class="stat-num" style="font-size:18px;">Catholic University of America</div>
+          <div class="stat-label">Tuma Laboratory · Washington DC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Bridging the clinic<br>and the <em>laboratory</em></h2>
+    <p>
+      I am a physician-scientist and doctoral researcher at The Catholic University of America, working in Dr. Pamela L. Tuma's laboratory. My research sits at the intersection of cell biology, metabolism, and liver disease — investigating how alcohol rewires protein acetylation to disrupt the hepatocyte's internal trafficking machinery.
+    </p>
+    <p>
+      My clinical training as a physician (MBChB) informs every experiment I design. I bring a translational lens to mechanistic questions, always asking: what does this mean for a patient? What does it mean for a drug target?
+    </p>
+    <p>
+      Long-term, I am building toward a career as a translational physician-scientist in biotechnology — where I can drive therapeutic development from first principles, informed by both patient need and molecular insight.
+    </p>
+  </div>
+
+  <div class="about-sidebar">
+    <div class="section-label" style="margin-bottom:24px;">Quick Profile</div>
+    <div class="sidebar-block">
+      <div class="sidebar-key">Institution</div>
+      <div class="sidebar-val">The Catholic University of America</div>
+    </div>
+    <div class="sidebar-block">
+      <div class="sidebar-key">Laboratory</div>
+      <div class="sidebar-val">Tuma Lab · Dept. of Biology</div>
+    </div>
+    <div class="sidebar-block">
+      <div class="sidebar-key">Degree</div>
+      <div class="sidebar-val">MBChB (Medicine) · PhD Candidate</div>
+    </div>
+    <div class="sidebar-block">
+      <div class="sidebar-key">Conferences</div>
+      <div class="sidebar-val">AASLD · ASCB</div>
+    </div>
+    <div class="sidebar-block">
+      <div class="sidebar-key">ORCID</div>
+      <div class="sidebar-val"><a href="https://orcid.org" target="_blank">0000-000X-XXXX-XXXX</a></div>
+    </div>
+    <div class="sidebar-block">
+      <div class="sidebar-key">Email</div>
+      <div class="sidebar-val"><a href="mailto:okesooto@cua.edu">okesooto@cua.edu</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label">Research Focus</div>
+  <h2 class="section-title">Decoding the<br><em>acetylated hepatocyte</em></h2>
+  <div class="research-grid">
+    <div class="research-card reveal">
+      <div class="rc-number">01</div>
+      <div class="rc-title">Ethanol & Protein Acetylation</div>
+      <p class="rc-body">Characterizing how ethanol exposure alters the hepatic acetylome and how these post-translational modifications impair intracellular vesicular trafficking and organelle homeostasis in WIF-B cells.</p>
+      <div class="rc-tags">
+        <span class="rc-tag">Acetyl-CoA</span>
+        <span class="rc-tag">WIF-B Cells</span>
+        <span class="rc-tag">Hepatic Trafficking</span>
+      </div>
+    </div>
+    <div class="research-card reveal" style="transition-delay:0.1s">
+      <div class="rc-number">02</div>
+      <div class="rc-title">ACLY Inhibition as Therapeutic Strategy</div>
+      <p class="rc-body">Translating clinical pharmacokinetics of bempedoic acid into in vitro dosing models. Comparing bempedoic acid and hydroxycitrate as ACLY inhibitors to modulate acetyl-CoA availability and restore hepatic function.</p>
+      <div class="rc-tags">
+        <span class="rc-tag">Bempedoic Acid</span>
+        <span class="rc-tag">Hydroxycitrate</span>
+        <span class="rc-tag">ACLY</span>
+      </div>
+    </div>
+    <div class="research-card reveal" style="transition-delay:0.2s">
+      <div class="rc-number">03</div>
+      <div class="rc-title">Autophagy & Organelle Dynamics</div>
+      <p class="rc-body">Quantifying autophagy flux markers including p62 and LC3 puncta via immunofluorescence imaging to understand how caloric restriction mimetics rescue autophagic degradation in alcohol-exposed hepatocytes.</p>
+      <div class="rc-tags">
+        <span class="rc-tag">Autophagy</span>
+        <span class="rc-tag">LC3 / p62</span>
+        <span class="rc-tag">Immunofluorescence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE / LEADERSHIP -->
+<section id="experience">
+  <div class="section-label">Leadership & Service</div>
+  <h2 class="section-title">Beyond the <em>bench</em></h2>
+  <div class="exp-grid">
+    <div class="exp-item reveal">
+      <div class="exp-role">TEDx Licensee & Organizer</div>
+      <div class="exp-org">TEDx</div>
+      <p class="exp-body">Licensed and organized a TEDx event, managing logistics, speaker curation, and production from concept to execution.</p>
+    </div>
+    <div class="exp-item reveal" style="transition-delay:0.1s">
+      <div class="exp-role">Senator</div>
+      <div class="exp-org">Graduate Students' Association · CUA</div>
+      <p class="exp-body">Representing doctoral students in university governance, advocating for graduate researcher interests and resource allocation.</p>
+    </div>
+    <div class="exp-item reveal" style="transition-delay:0.15s">
+      <div class="exp-role">Grant Reviewer</div>
+      <div class="exp-org">ASCB COMPASS Program</div>
+      <p class="exp-body">Evaluated grant proposals for the COMPASS initiative, supporting early-career cell biology researchers in securing funding.</p>
+    </div>
+    <div class="exp-item reveal" style="transition-delay:0.2s">
+      <div class="exp-role">Mid-Atlantic Mentor</div>
+      <div class="exp-org">APSA · American Physician Scientist Association</div>
+      <p class="exp-body">Mentoring pre-doctoral physician-scientists navigating the transition between clinical training and research careers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <h2 class="section-title">Let's build something<br><em>together</em></h2>
+  <div class="contact-links">
+    <a href="mailto:okesooto@cua.edu" class="contact-link">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+      </div>
+      <span>Email</span>
+    </a>
+    <a href="https://linkedin.com/in/okesooto" target="_blank" class="contact-link">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 10v7M7 7v.01M12 10v7M12 13a3 3 0 016 0v4"/></svg>
+      </div>
+      <span>LinkedIn</span>
+    </a>
+    <a href="https://orcid.org/0000-000X-XXXX-XXXX" target="_blank" class="contact-link">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12h6M12 8v8"/></svg>
+      </div>
+      <span>ORCID</span>
+    </a>
+    <a href="https://scholar.google.com" target="_blank" class="contact-link">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <span>Scholar</span>
+    </a>
+  </div>
+  <div class="contact-email">okesooto@cua.edu</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-left">Oluwaseyi Okesooto</div>
+  <div class="f-right">MBChB · PhD Candidate · CUA · Washington DC</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Nav active state
+  const sections = document.querySelectorAll('section[id], .hero');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id || '';
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>
